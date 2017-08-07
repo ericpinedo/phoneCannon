@@ -5,5 +5,4 @@ So I decided to make a a program that floods these dishonest telecommunications 
 I do not intend to use this program for malicious purposes, the main purpose of this program 
 is to motivate myself to learn more about MEAN stack development and REST APIs
 
-First I attempt to make a functional terminal based application and after successful testing, I will 
-attempt to make a working web applicaiton.
+First I will attempt to make a functional terminal based application and after successful testing, I willattempt to make a working web applicaiton.
