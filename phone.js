@@ -1,11 +1,11 @@
 /* Author: Eric Pinedo
  * Date: August 3, 2017
- * File Description: The main file which will hold all of the 'phone canon' logic 
+ * File Description: The main file which will hold all of the 'phone cannon' logic 
  */
 
 
 
-/*
+/* 
 var prompts = require('./prompts.js');
 console.log(prompts.login(hello));
  
@@ -28,20 +28,29 @@ rl.question( hello, (answer) => {
 
 /** Basic API logic **/
 
-
-var accountSid = 'AC8e527c5ca687d9ebacdebb42e0a73fe6';
-var authToken = 'b79909cc7e280c31d75408ecd3dd1cf0';
+//using twilio
 
 
-var numberToCall 
+
+var info = require('./config.js');
+console.log(info);
+
+var accountSid = info.MY_KEY;
+var authToken = info.SECREY_KEY;
+
+
 
 
 var client = require('twilio')(accountSid, authToken);
 
+
+while( true ) { 
 client.calls.create({
     url: "http://demo.twilio.com/docs/voice.xml",
-    to: "+14155551212",
-    from: "+15017250604"
+    to: info.to,
+    from: info.from
 }, function(err, call) {
     process.stdout.write(call.sid);
 });
+
+}
